@@ -15,7 +15,7 @@ export function ShopCatalog(){
       {categories.map(item=><button type="button" className={category===item?'active':''} aria-pressed={category===item} onClick={()=>setCategory(item)} key={item}>{item}</button>)}
     </div>
     <div className="product-grid">{visible.map((product,i)=><Link href={`/shop/${product.slug}`} className="product-card" key={product.slug}>
-      <div className={`product-image product-visual visual-${(i%6)+1}`}><span>{product.category}</span><small>ARTWORK<br/>REGISTRATION</small></div>
+      {product.image?<div className="product-image"><img src={product.image} alt={product.name}/></div>:<div className={`product-image product-visual visual-${(i%6)+1}`}><span>{product.category}</span><small>ARTWORK<br/>REGISTRATION</small></div>}
       <span>{product.category}</span><h3>{product.name}</h3><p>{product.description}</p><div><b>{product.price}</b><i>{product.status}</i></div>
     </Link>)}</div>
   </>;
