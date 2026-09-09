@@ -1,6 +1,41 @@
-'use client';
-import { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import type { Metadata } from 'next';
+import { products } from '../shop/data';
+import { ContactForm } from './contact-form';
+import './contact.css';
 
-function ContactForm(){const p=useSearchParams();const t=p.get('type')==='group'?'출강/단체수업':'수강/체험 문의';return <><section className="page-hero"><p className="eyebrow">CONTACT</p><h1>언제든지,<br/>편하게 문의해주세요.</h1><p className="lead">마음을 담아 답변드리겠습니다.</p></section><section className="page-content"><form className="contact-form" onSubmit={e=>{e.preventDefault();alert('현재는 화면 구성 단계입니다. 실제 전송 연동 후 이용할 수 있습니다.')}}><label>이름<input required placeholder="성함을 입력해주세요"/></label><label>연락처<input required placeholder="010-0000-0000"/></label><label>이메일 (선택)<input type="email" placeholder="example@email.com"/></label><label>문의 유형<select defaultValue={t}><option>수강/체험 문의</option><option>출강/단체수업</option><option>강의 문의</option><option>협업 문의</option><option>기타</option></select></label><label>관심 프로그램<input placeholder="예: 전통매듭 원데이 클래스"/></label><label>희망 일정<input type="date"/></label><label>예상 인원<input type="number" min="1"/></label><label className="full">문의 내용<textarea rows={6} required placeholder="궁금한 점을 편하게 남겨주세요"/></label><label className="full"><span><input type="checkbox" required/> 개인정보 수집 및 이용에 동의합니다.</span></label><button className="button full" type="submit">문의 보내기</button><p className="notice full">현재 문의 폼은 화면 시연용입니다. 실제 접수 기능은 서버 또는 이메일 서비스 연동 후 활성화됩니다.</p></form></section></>}
-export default function Page(){return <Suspense fallback={<section className="page-content">문의 양식을 준비하고 있습니다.</section>}><ContactForm/></Suspense>}
+export const metadata: Metadata = {
+  title: '문의·예약',
+  description: '하린문화예술 공예 클래스, 기관 출강, 감성예술, AI 활용교육, 작품 구매 및 주문제작 문의.',
+};
+
+const typeMap: Record<string, string> = {
+  class: '수강·체험 문의',
+  group: '출강·단체수업',
+  ai: 'AI 활용교육',
+  healing: '타로·감성예술',
+  product: '작품 구매',
+  custom: '주문제작',
+  collaboration: '협업 문의',
+  other: '기타',
+};
+
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ type?: string; product?: string }>;
+}) {
+  const query = await searchParams;
+  const product = products.find((item) => item.slug === query.product);
+
+  return <>
+    <section className="page-hero contact-hero">
+      <p className="eyebrow">CONTACT & RESERVATION</p>
+      <h1>언제든지,<br/>편하게 문의해주세요.</h1>
+      <p className="lead">수강 신청, 체험, 기관 출강, 작품 구매,<br className="mobile-break"/> 강의 및 협업에 관한 문의를 편하게 남겨주세요.</p>
+    </section>
+    <ContactForm
+      initialType={typeMap[query.type ?? ''] ?? '수강·체험 문의'}
+      initialInterest={product ? `${product.category} · ${product.name} (${product.slug})` : ''}
+    />
+  </>;
+}
