@@ -24,6 +24,14 @@ const homePosts = [
   ['AI 활용','작품과 수업을 알리는 AI 활용','공방과 강사의 홍보에 바로 적용할 수 있는 이미지·글·콘텐츠 활용법을 다룹니다.'],
 ];
 
+const realMoments=[
+  {label:'전통매듭',src:'/images/real/knot-03.webp',alt:'하린문화예술 전통매듭 실제 작품'},
+  {label:'칠보공예',src:'/images/real/enamel-02.webp',alt:'하린문화예술 칠보공예 실제 작품'},
+  {label:'출강 현장',src:'/images/real/class-01.webp',alt:'하린문화예술 기관 단체 출강 현장'},
+  {label:'수업 현장',src:'/images/real/class-02.webp',alt:'하린문화예술 성인 공예 수업 현장'},
+  {label:'어반스케치',src:'/images/real/urban-01.webp',alt:'하린문화예술 어반스케치 실제 작품'},
+];
+
 export default function Home(){return <>
   <section className="hero">
     <div className="hero-copy">
@@ -49,17 +57,17 @@ export default function Home(){return <>
   </section>
 
   <section className="section split">
-    <div className="story-image"><img src="/images/hero.png" alt="하린문화예술의 공예 작업 풍경"/></div>
+    <div className="story-image real"><img src="/images/real/knot-03.webp" alt="하린문화예술에서 제작한 전통매듭 장식 작품"/></div>
     <div><p className="eyebrow">ABOUT HARIN</p><h2>예술, 사람, 배움이 만나는<br/>따뜻한 문화예술 플랫폼</h2><p className="body">하린문화예술은 전통과 현대를 잇는 공예와 감성예술, 교육을 통해 사람과 일상을 연결합니다. 한 번의 체험부터 꾸준한 배움, 기관 출강과 실용적인 AI 활용까지 각자의 목적에 맞는 방식으로 예술을 경험할 수 있도록 구성합니다.</p><div className="values"><span><Palette size={18}/>공예의 가치</span><span><Heart size={18}/>치유와 감성</span><span><Sparkles size={18}/>배움과 나눔</span><span><Bot size={18}/>실생활의 가능성</span></div><Link className="text-link" href="/about">하린문화예술 이야기 보기 <ArrowRight size={16}/></Link></div>
   </section>
 
-  <section className="section"><div className="feature"><div><p className="eyebrow light">GROUP PROGRAM</p><h2>예술이 필요한 곳으로<br/>찾아갑니다.</h2><p>학교, 복지기관, 기업, 평생학습기관, 지역단체와 문화센터의 대상과 목적에 맞춰 프로그램을 제안합니다.</p><div className="actions"><Link className="button cream" href="/group-class">출강 프로그램 보기</Link><Link className="button outline" href="/contact?type=group">출강 문의하기</Link></div></div><Building2 size={120}/></div></section>
+  <section className="section"><div className="feature"><div><p className="eyebrow light">GROUP PROGRAM</p><h2>예술이 필요한 곳으로<br/>찾아갑니다.</h2><p>학교, 복지기관, 기업, 평생학습기관, 지역단체와 문화센터의 대상과 목적에 맞춰 프로그램을 제안합니다.</p><div className="actions"><Link className="button cream" href="/group-class">출강 프로그램 보기</Link><Link className="button outline" href="/contact?type=group">출강 문의하기</Link></div></div><div className="feature-photo"><img src="/images/real/class-01.webp" alt="하린문화예술 기관 단체 출강 실제 현장"/></div></div></section>
 
   <section className="section ai"><div><p className="eyebrow">AI × CULTURE & ARTS</p><h2>전통과 기술이 만나는<br/><em>새로운 가능성</em></h2></div><div><p className="body">공방 운영자, 소상공인, 강사와 창작자가 AI를 활용해 자신의 작품과 서비스를 더 잘 보여줄 수 있도록 돕습니다. 어렵게 배우는 기술보다 바로 내 일에 적용하는 방법에 집중합니다.</p><div className="chips">{['AI 이미지','블로그 콘텐츠','SNS · 숏폼','상세페이지','강의자료','라이브 방송'].map(x=><span key={x}>{x}</span>)}</div><Link className="button" href="/ai-class">AI 활용 교육 알아보기 <ArrowRight size={17}/></Link></div></section>
 
   <section className="shop-home section"><div className="section-head"><div><p className="eyebrow">HARIN ART SHOP</p><h2>손으로 만든 작품을 만나보세요</h2></div><p>공예품과 그림은 실제 작품 사진, 작품명, 가격 등 확인된 정보부터 순차적으로 등록합니다.</p></div><div className="product-grid">{products.slice(0,6).map((product,i)=><Link href={`/shop/${product.slug}`} className="product-card" key={product.slug}><div className={`product-image product-visual visual-${i+1}`}><span>{product.category}</span><small>ARTWORK<br/>REGISTRATION</small></div><span>{product.category}</span><h3>{product.name}</h3><p>{product.description}</p><div><b>{product.price}</b><i>{product.status}</i></div></Link>)}</div><div className="center"><Link className="button" href="/shop">작품샵 보기 <ArrowRight size={17}/></Link></div></section>
 
-  <section className="soft section"><div className="section-head"><div><p className="eyebrow">OUR MOMENTS</p><h2>하린의 예술이 머무는 순간</h2></div><Link className="text-link" href="/gallery">갤러리 전체보기 <ArrowRight size={16}/></Link></div><div className="gallery-grid">{['공예 작품','수업 현장','출강 현장','전시 · 행사','캘리그라피','어반스케치'].map((x,i)=><Link href="/gallery" className={'gallery-item g'+i} key={x}><div className="gallery-visual"><small>HARIN MOMENTS</small></div><span>{x}</span></Link>)}</div></section>
+  <section className="soft section"><div className="section-head"><div><p className="eyebrow">OUR MOMENTS</p><h2>실제 작품과 수업의 순간</h2></div><Link className="text-link" href="/gallery">갤러리 전체보기 <ArrowRight size={16}/></Link></div><div className="home-photo-gallery">{realMoments.map(item=><Link href="/gallery" key={item.label}><figure><img src={item.src} alt={item.alt}/><span>{item.label}</span></figure></Link>)}</div></section>
 
   <section className="section"><div className="section-head"><div><p className="eyebrow">JOURNAL</p><h2>예술과 일상이 만나는 이야기</h2></div><Link className="text-link" href="/blog">블로그 전체보기 <ArrowRight size={16}/></Link></div><div className="posts">{homePosts.map(p=><Link href="/blog" key={p[1]}><span>{p[0]}</span><h3>{p[1]}</h3><p>{p[2]}</p></Link>)}</div></section>
 

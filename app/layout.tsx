@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import './shop.css';
+import './real-photos.css';
 import { SiteShell } from './site-shell';
 
 export const metadata: Metadata = {
