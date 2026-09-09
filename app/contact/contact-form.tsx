@@ -17,7 +17,7 @@ export function ContactForm({initialType, initialInterest}:{initialType:string;i
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     // TODO: 실제 이메일 또는 문의 접수 API가 준비되면 이 위치에서 폼 데이터를 전송합니다.
-    setMessage('현재 온라인 전송 기능은 연결 준비 중입니다. 입력하신 내용은 전송되거나 저장되지 않았습니다.');
+    setMessage('온라인 접수 기능은 연결 준비 중입니다. 현재 입력하신 내용은 전송되거나 저장되지 않습니다.');
   }
 
   return <>
@@ -25,9 +25,9 @@ export function ContactForm({initialType, initialInterest}:{initialType:string;i
       <div className="contact-intro">
         <p className="eyebrow">SEND A MESSAGE</p>
         <h2>어떤 도움이<br/>필요하신가요?</h2>
-        <p>문의 내용을 자세히 남겨주시면 확인 후 상담 방향을 안내해 드립니다.</p>
+        <p>수강, 출강, 작품 구매와 협업 등 필요한 내용을 남겨주시면 상담 방향을 확인할 수 있도록 준비하고 있습니다.</p>
         <div className="contact-note"><span>01</span><p><b>필수 항목을 작성해 주세요.</b><br/>표시가 있는 항목은 상담을 위해 꼭 필요합니다.</p></div>
-        <div className="contact-note"><span>02</span><p><b>현재는 UI 준비 단계입니다.</b><br/>실제 전송 기능이 연결되기 전까지 입력 내용은 저장되지 않습니다.</p></div>
+        <div className="contact-note"><span>02</span><p><b>온라인 접수 연동을 준비 중입니다.</b><br/>현재는 문의 화면을 먼저 확인할 수 있으며 입력 내용은 저장되지 않습니다.</p></div>
       </div>
       <form className="contact-form contact-form-card" onSubmit={handleSubmit}>
         <label>이름 <b>*</b><input name="name" required autoComplete="name" placeholder="성함을 입력해주세요"/></label>
@@ -38,8 +38,8 @@ export function ContactForm({initialType, initialInterest}:{initialType:string;i
         <label>희망 일정<input name="date" type="date"/></label>
         <label>예상 인원<input name="headcount" type="number" min="1" placeholder="예: 10"/></label>
         <label className="full">문의 내용 <b>*</b><textarea name="message" rows={7} required placeholder="문의하실 내용을 자세히 남겨주세요"/></label>
-        <label className="privacy full"><input name="privacy" type="checkbox" required/><span><b>*</b> 개인정보 수집·이용에 동의합니다.<small>문의 상담을 위해 이름, 연락처와 작성 내용을 수집하며 상담 완료 후 관련 기준에 따라 처리합니다.</small></span></label>
-        <button className="button contact-submit full" type="submit">문의 보내기 <ArrowRight size={17}/></button>
+        <label className="privacy full"><input name="privacy" type="checkbox" required/><span><b>*</b> 개인정보 수집·이용에 동의합니다.<small>실제 접수 기능 연결 후 문의 상담을 위해 이름, 연락처와 작성 내용을 수집하도록 구성할 예정입니다.</small></span></label>
+        <button className="button contact-submit full" type="submit">문의 내용 확인 <ArrowRight size={17}/></button>
         {message && <p className="form-status full" role="status">{message}</p>}
       </form>
     </section>
