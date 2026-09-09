@@ -1,5 +1,14 @@
 import Link from 'next/link';
-import { products } from './data';
-export const metadata={title:'작품샵',description:'하린문화예술이 직접 제작한 전통매듭, 칠보, 액세서리와 그림 작품 소개'};
-const categories=['전체','전통매듭','칠보공예','액세서리','그림·회화','캘리그라피','어반스케치'];
-export default function Shop(){return <><section className="page-hero"><p className="eyebrow">HARIN ART SHOP</p><h1>손으로 만든 작품을<br/>일상 가까이</h1><p className="lead">공예품과 그림 작품을 둘러보고 구매 또는 주문제작을 문의해보세요. 실제 작품 사진과 판매 정보는 준비되는 순서대로 업데이트합니다.</p></section><section className="page-content"><div className="filters">{categories.map((x,i)=><button className={i===0?'active':''} key={x}>{x}</button>)}</div><div className="product-grid">{products.map((product,i)=><Link href={`/shop/${product.slug}`} className="product-card" key={product.slug}><div className={`product-image product-visual visual-${i+1}`}><span>{product.category}</span><small>ARTWORK PHOTO<br/>COMING SOON</small></div><span>{product.category}</span><h3>{product.name}</h3><p>{product.description}</p><div><b>{product.price}</b><i>{product.status}</i></div></Link>)}</div><div className="page-cta"><div><h3>작품 구매와 주문제작을 문의해보세요.</h3><p>원하는 작품 종류, 수량, 일정이 있다면 문의 페이지에서 편하게 남겨주세요.</p></div><Link className="button" href="/contact?type=product">작품 구매 문의</Link></div></section></>}
+import { ArrowRight } from 'lucide-react';
+import { ShopCatalog } from './shop-catalog';
+
+export const metadata={title:'작품샵',description:'하린문화예술이 직접 제작한 공예품과 그림 작품을 소개하고 작품·주문제작 문의로 연결합니다.'};
+
+export default function Shop(){return <>
+  <section className="page-hero"><p className="eyebrow">HARIN ART SHOP</p><h1>손으로 만든 작품을<br/>일상 가까이</h1><p className="lead">전통매듭, 칠보, 액세서리와 그림 작품을 카테고리별로 살펴보세요.</p></section>
+  <section className="page-content">
+    <div className="shop-intro"><div><p className="eyebrow">ARTWORK NOTICE</p><h2>확인된 작품 정보부터 등록합니다</h2></div><p>현재 작품 정보는 등록 준비 중입니다. 실제 사진, 작품명, 재료, 크기와 가격은 확인된 내용만 업데이트하며 임의의 상품 정보는 표시하지 않습니다.</p></div>
+    <ShopCatalog/>
+    <div className="page-cta"><div><h3>작품이나 주문제작이 궁금하신가요?</h3><p>원하는 종류, 수량과 일정을 남겨주시면 가능한 범위를 확인해 안내할 수 있습니다.</p></div><Link href="/contact?type=custom" className="button">작품·주문제작 문의 <ArrowRight size={16}/></Link></div>
+  </section>
+</>}
