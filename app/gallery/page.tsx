@@ -1,0 +1,3 @@
+export const metadata={title:'갤러리',description:'공예 작품, 수업 현장, 캘리그라피와 어반스케치 활동 기록'};
+const categories=['공예 작품','수업 현장','출강','전시·행사','캘리그라피','어반스케치'];
+export default function Page(){return <><section className="page-hero"><p className="eyebrow">GALLERY</p><h1>손끝에서 피어난<br/>우리의 순간들</h1></section><section className="page-content"><div className="filters"><button>전체</button>{categories.map(x=><button key={x}>{x}</button>)}</div><div className="gallery-grid">{Array.from({length:9},(_,i)=><figure className={'gallery-item g'+i} key={i}><img src="/images/hero.png" alt={`하린문화예술 ${categories[i%categories.length]}`}/><span>{categories[i%categories.length]}</span></figure>)}</div></section></>}

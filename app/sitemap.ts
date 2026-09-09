@@ -1,0 +1,1 @@
+export default function sitemap(){return['','about','craft','group-class','healing-art','ai-class','shop','gallery','blog','contact'].map(x=>({url:`https://harin-culture-arts.yoojeongart.chatgpt.site/${x}`}))}

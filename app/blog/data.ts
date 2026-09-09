@@ -1,0 +1,1 @@
+export const posts=[{category:'수업 후기',title:'작은 매듭 하나에서 시작된 따뜻한 하루',date:'2026.09.07'},{category:'공예 이야기',title:'칠보의 빛과 색을 오래 간직하는 방법',date:'2026.09.03'},{category:'강의 소식',title:'가을 기관 출강 프로그램 안내',date:'2026.08.28'},{category:'AI 활용',title:'공방 홍보, AI와 함께 가볍게 시작하기',date:'2026.08.22'},{category:'문화예술 이야기',title:'일상 속 예술이 마음에 머무는 방식',date:'2026.08.14'}];
