@@ -9,7 +9,7 @@ export type GalleryItem={
   alt:string;
 };
 
-const categoryOrder=['전통매듭','칠보공예','출강·수업','어반스케치'];
+const categoryOrder=['전통매듭','칠보공예','어반스케치'];
 
 export function GalleryCollection({items}:{items:GalleryItem[]}){
   const categories=useMemo(()=>['전체',...categoryOrder.filter(name=>items.some(item=>item.category===name))],[items]);
