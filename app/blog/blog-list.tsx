@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import { posts } from './data';
 
@@ -10,6 +12,6 @@ export function BlogList(){
   const visible=category==='전체'?posts:posts.filter(post=>post.category===category);
   return <>
     <div className="filters" role="group" aria-label="블로그 카테고리">{categories.map(item=><button type="button" className={category===item?'active':''} aria-pressed={category===item} onClick={()=>setCategory(item)} key={item}>{item}</button>)}</div>
-    <div className="blog-list">{visible.length===0&&<p role="status">수공예 작품과 만드는 과정을 소개할 글을 준비하고 있습니다.</p>}{visible.map(post=><article key={post.title}><span>{post.category}</span><h3>{post.title}</h3><p>{post.excerpt}</p><small>{post.status}</small></article>)}</div>
+    <div className="blog-list">{visible.length===0&&<p role="status">수공예 작품과 만드는 과정을 소개할 글을 준비하고 있습니다.</p>}{visible.map(post=><article key={post.title}>{post.image&&<Image src={post.image} alt={post.imageAlt??post.title} width={600} height={450} sizes="(max-width: 760px) 100vw, 380px" style={{width:'100%',height:'auto',marginBottom:16}}/>}<span>{post.category}</span><h3>{post.href?<Link href={post.href}>{post.title}</Link>:post.title}</h3><p>{post.excerpt}</p>{post.href&&<Link href={post.href} style={{textDecoration:'underline',marginBottom:20}}>작품 이야기 읽기 →</Link>}<small>{post.status}</small></article>)}</div>
   </>;
 }
