@@ -1,3 +1,4 @@
+import { pageMetadata } from '../../seo';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { notFound } from 'next/navigation';
@@ -8,7 +9,7 @@ export function generateStaticParams(){return products.map(product=>({slug:produ
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}){
   const {slug}=await params;
   const product=products.find(item=>item.slug===slug);
-  return product?{title:`${product.name} | 작품샵`,description:product.description}:{title:'작품을 찾을 수 없습니다'};
+  return product?pageMetadata(`/shop/${product.slug}`, `${product.name} | 작품샵`, `${product.name}. ${product.description}`):{title:'작품을 찾을 수 없습니다'};
 }
 
 export default async function ProductDetail({params}:{params:Promise<{slug:string}>}){

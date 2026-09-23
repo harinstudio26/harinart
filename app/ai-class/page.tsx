@@ -1,8 +1,9 @@
+import { pageMetadata } from '../seo';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import styles from './ai-class.module.css';
 
-export const metadata={title:'AI 활용 교육'};
+export const metadata = pageMetadata("/ai-class","AI 활용 교육","공방 운영자·소상공인·강사·창작자를 위한 실전 AI 교육. 이미지 제작, 블로그 글, SNS·릴스, 상세페이지, 강의자료와 라이브 방송 준비를 배웁니다.");
 
 const programs=[
   {no:'01',title:'AI 이미지 만들기',text:'필요한 이미지를 직접 만들고 수정합니다.',image:'/images/hero.png',alt:'AI 이미지 제작을 연상시키는 하린문화예술 비주얼'},

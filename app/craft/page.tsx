@@ -1,5 +1,6 @@
+import { pageMetadata } from '../seo';
 import{StandardPage,pageData}from'../components';
-export const metadata={title:'공예 클래스'};
+export const metadata = pageMetadata("/craft","공예 클래스","전통매듭, 칠보공예, 액세서리 수공예를 배우는 하린문화예술 공예 클래스. 처음 시작하는 원데이 체험부터 기초와 응용을 익히는 정규 강의까지 안내합니다.");
 export default function Page(){return <>
   <StandardPage data={pageData.craft}/>
   <section className="real-photo-section">

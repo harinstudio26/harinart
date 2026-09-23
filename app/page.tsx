@@ -1,3 +1,5 @@
+import { pageMetadata } from './seo';
+export const metadata = pageMetadata("/","공예·예술·교육·AI 활용","하린문화예술의 전통매듭·칠보·액세서리 공예, 타로·감성예술과 AI 활용교육을 만나보세요. 개인 수업, 기관·단체 출강, 작품과 주문제작을 안내합니다.");
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './services.module.css';

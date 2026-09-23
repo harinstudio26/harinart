@@ -1,10 +1,11 @@
+import { pageMetadata } from '../seo';
 import fs from 'node:fs';
 import path from 'node:path';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { GalleryCollection, type GalleryItem } from './gallery-collection';
 
-export const metadata={title:'갤러리',description:'하린문화예술의 전통매듭, 칠보공예와 어반스케치 작품 기록'};
+export const metadata = pageMetadata("/gallery","갤러리","하린문화예술이 만든 전통매듭 장식, 칠보공예와 어반스케치의 실제 작품 사진을 모았습니다. 재료의 색과 손작업의 표현을 살펴보세요.");
 export const dynamic='force-static';
 
 const folderConfig=[

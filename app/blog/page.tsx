@@ -1,8 +1,9 @@
+import { pageMetadata } from '../seo';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { BlogList } from './blog-list';
 
-export const metadata={title:'블로그 · 소식',description:'하린문화예술의 수업 후기, 공예 이야기, 강의 소식과 AI 활용 기록'};
+export const metadata = pageMetadata("/blog","블로그 · 소식","하린문화예술의 공예 이야기와 작품 제작 기록, 수업·강의 소식, AI 활용 콘텐츠를 전합니다. 원석 헤어핀 등 손작업에 담긴 이야기를 읽어보세요.");
 
 export default function Page(){return <>
   <section className="page-hero"><p className="eyebrow">HARIN JOURNAL</p><h1>예술과 일상이<br/>만나는 이야기</h1><p className="lead">수업과 작품, 배움과 창작의 기록을 확인된 내용부터 차곡차곡 전합니다.</p></section>

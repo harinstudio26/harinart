@@ -1,5 +1,6 @@
+import { pageMetadata } from '../seo';
 import{StandardPage,pageData}from'../components';
-export const metadata={title:'감성예술'};
+export const metadata = pageMetadata("/healing-art","감성예술","타로의 그림과 상징 읽기, 캘리그라피 손글씨, 일상을 기록하는 어반스케치를 만나보세요. 개인과 소그룹, 기관을 위한 하린문화예술 감성예술 프로그램입니다.");
 export default function Page(){return <>
   <StandardPage data={pageData.healing}/>
   <section className="real-photo-section">

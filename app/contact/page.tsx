@@ -1,12 +1,9 @@
-import type { Metadata } from 'next';
+import { pageMetadata } from '../seo';
 import { products } from '../shop/data';
 import { ContactForm } from './contact-form';
 import './contact.css';
 
-export const metadata: Metadata = {
-  title: '문의·예약',
-  description: '하린문화예술 공예 클래스, 기관 출강, 감성예술, AI 활용교육, 작품 구매 및 주문제작 문의.',
-};
+export const metadata = pageMetadata("/contact","문의·예약","하린문화예술 수강·체험, 기관·단체 출강, 타로·감성예술, AI 교육과 작품·주문제작 상담을 신청하세요. 관심 분야와 일정, 인원 등을 남길 수 있습니다.");
 
 const typeMap: Record<string, string> = {
   class: '수강·체험 문의',
