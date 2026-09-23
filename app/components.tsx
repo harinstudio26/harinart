@@ -1,7 +1,9 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import programStyles from './program-images.module.css';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
-type Item = { name: string; description: string };
+type Item = { name: string; description: string; image?: { src: string; alt: string } };
 type GuideItem = { title: string; text: string };
 type SummaryItem = { label: string; value: string };
 type PageData = {
@@ -116,10 +118,10 @@ export const pageData: Record<string, PageData> = {
       {title:'어반스케치',text:'카페, 거리, 건물과 여행지처럼 일상의 풍경을 선과 색으로 기록합니다.'},
     ],
     items: [
-      {name:'타로 리딩 · 타로 교육',description:'카드의 이미지와 상징을 통해 자신의 마음을 차분히 바라보고, 그림과 이야기로 의미를 풀어가는 시간입니다.'},
-      {name:'캘리그라피',description:'좋아하는 문장을 손글씨로 표현하며 호흡과 마음을 가다듬는 생활예술 프로그램입니다.'},
-      {name:'어반스케치',description:'카페, 거리, 건물과 여행지 등 일상의 풍경을 나만의 선과 색으로 기록하는 생활예술입니다.'},
-      {name:'감성 · 힐링 프로그램',description:'색과 선, 손의 움직임을 통해 감정을 표현하고 편안한 쉼을 경험하는 예술 활동입니다.'},
+      {name:'타로 리딩 · 타로 교육',image:{src:'/images/healing/tarot.webp',alt:'해와 달, 별을 담은 타로 카드 일러스트'},description:'카드의 이미지와 상징을 통해 자신의 마음을 차분히 바라보고, 그림과 이야기로 의미를 풀어가는 시간입니다.'},
+      {name:'캘리그라피',image:{src:'/images/healing/calligraphy.webp',alt:'한지 위의 붓과 먹으로 표현한 캘리그라피 일러스트'},description:'좋아하는 문장을 손글씨로 표현하며 호흡과 마음을 가다듬는 생활예술 프로그램입니다.'},
+      {name:'어반스케치',image:{src:'/images/healing/urban.webp',alt:'골목 풍경을 담은 수채화 스케치북 일러스트'},description:'카페, 거리, 건물과 여행지 등 일상의 풍경을 나만의 선과 색으로 기록하는 생활예술입니다.'},
+      {name:'감성 · 힐링 프로그램',image:{src:'/images/healing/healing.webp',alt:'색과 나뭇잎을 그린 감성 미술 활동 일러스트'},description:'색과 선, 손의 움직임을 통해 감정을 표현하고 편안한 쉼을 경험하는 예술 활동입니다.'},
     ],
   },
   ai: {
@@ -161,7 +163,7 @@ export function StandardPage({ data }: { data: PageData }) {
     {data.summary && <section className="page-summary" aria-label="프로그램 요약">{data.summary.map(item=><div key={item.label}><span>{item.label}</span><b>{item.value}</b></div>)}</section>}
     <section className="page-content">
       <div className="content-heading"><p className="eyebrow">PROGRAM GUIDE</p><h2>{isAbout ? '하린문화예술을 소개합니다' : '프로그램 안내'}</h2><p>{isAbout ? '브랜드의 방향과 활동 분야를 한눈에 살펴보세요.' : '관심 있는 분야를 살펴보고 나에게 맞는 수업과 진행 방식을 찾아보세요.'}</p></div>
-      <div className={`program-grid ${isAbout ? 'about-grid' : ''}`}>{data.items.map((item, i) => <article id={`program-${i + 1}`} className="program" key={item.name}><span className="program-no">0{i + 1}</span><h3>{item.name}</h3><p>{item.description}</p></article>)}</div>
+      <div className={`program-grid ${isAbout ? 'about-grid' : ''}`}>{data.items.map((item, i) => <article id={`program-${i + 1}`} className="program" key={item.name}><span className="program-no">0{i + 1}</span>{item.image && <div className={programStyles.image}><Image src={item.image.src} alt={item.image.alt} fill sizes="(max-width: 760px) calc(100vw - 92px), (max-width: 1240px) calc((100vw - 88px) / 3 - 58px), 326px"/></div>}<h3>{item.name}</h3><p>{item.description}</p></article>)}</div>
 
       {data.guideItems && <section className="guide-panel"><div className="guide-copy"><p className="eyebrow">DETAIL GUIDE</p><h2>{data.guideTitle}</h2><p>{data.guideIntro}</p></div><div className="guide-list">{data.guideItems.map(item=><article key={item.title}><CheckCircle2 size={19}/><div><h3>{item.title}</h3><p>{item.text}</p></div></article>)}</div></section>}
 
