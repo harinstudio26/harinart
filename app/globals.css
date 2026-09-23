@@ -163,3 +163,81 @@ h3{line-height:1.4}
  .proof-strip{justify-content:center}
 }
 @media(max-width:520px){.service-grid{grid-template-columns:1fr}}
+
+/* Home content bands: alternate full-width dark and light sections. */
+main:has(> .hero) > .section {
+  max-width:none;
+  padding-inline:max(28px,calc((100% - var(--content))/2));
+  background:#fcfaf6;
+}
+main:has(> .hero) > .section:nth-child(odd of .section) {
+  --text:#fff8f1;
+  --muted:#e3d4c8;
+  --accent:#f0bd94;
+  --border:#816451;
+  --surface:#533e30;
+  color:var(--text);
+  background:#402f25;
+}
+main:has(> .hero) > .section:nth-child(odd of .section) .button {
+  background:#f6eee6;
+  color:#563724;
+}
+main:has(> .hero) > .section:nth-child(odd of .section) .button:hover {
+  background:#fff;
+}
+main:has(> .hero) > .section:nth-child(odd of .section) .home-photo-gallery span {
+  color:var(--muted);
+}
+main:has(> .hero) > .section:nth-child(odd of .section) .values span {
+  border-color:var(--border);
+}
+main:has(> .hero) > .section:nth-child(odd of .section) :focus-visible {
+  outline-color:#f0bd94;
+}
+main:has(> .hero) .feature {
+  background:transparent;
+  color:var(--text);
+  padding:0;
+  gap:40px;
+}
+main:has(> .hero) .feature p:not(.eyebrow) {
+  color:var(--muted);
+}
+main:has(> .hero) .feature .light {
+  color:var(--accent);
+}
+main:has(> .hero) .feature .cream,
+main:has(> .hero) > .final-cta .cream {
+  background:var(--primary);
+  color:#fff;
+}
+main:has(> .hero) .feature .cream:hover,
+main:has(> .hero) > .final-cta .cream:hover {
+  background:var(--primary-dark);
+}
+main:has(> .hero) .feature .outline,
+main:has(> .hero) > .final-cta .outline {
+  color:var(--primary);
+  border-color:#9c7a62;
+}
+main:has(> .hero) .feature .outline:hover,
+main:has(> .hero) > .final-cta .outline:hover {
+  background:var(--surface);
+}
+main:has(> .hero) > .final-cta {
+  background:#fcfaf6;
+  color:var(--text);
+}
+main:has(> .hero) > .final-cta > p:not(.eyebrow) {
+  color:var(--muted);
+}
+main:has(> .hero) > .final-cta .light {
+  color:var(--primary);
+}
+@media(max-width:900px) {
+  main:has(> .hero) .feature {flex-direction:column;align-items:stretch}
+}
+@media(max-width:760px) {
+  main:has(> .hero) > .section {padding-inline:20px}
+}
