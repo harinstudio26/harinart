@@ -241,3 +241,6 @@ main:has(> .hero) > .final-cta .light {
 @media(max-width:760px) {
   main:has(> .hero) > .section {padding-inline:20px}
 }
+
+/* Full-card journal links keep keyboard navigation on a single meaningful title. */
+.blog-clickable-card{position:relative}.blog-clickable-card h3 a::after{content:'';position:absolute;inset:0}.blog-clickable-card:focus-within{outline:2px solid var(--primary);outline-offset:4px}.blog-clickable-card:hover{border-color:var(--primary)}.blog-list .blog-ai-label{font-size:.8125rem;line-height:1.6;margin-top:8px}.blog-list .blog-read-label{font-size:1rem;text-decoration:underline;margin-bottom:20px;color:var(--primary)}

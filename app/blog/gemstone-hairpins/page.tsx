@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './article.module.css';
+import { ArticleLayout } from '../article-layout';
 
 const title = '원석 헤어핀, 작은 장식에 담은 색과 손작업 이야기';
 const description = '유정아트공방의 원석 헤어핀 세 작품을 통해 색 조합, 자개와 금속 장식, 와이어 작업의 매력을 만나보세요.';
@@ -17,7 +18,7 @@ function Photo({ number, alt, caption, priority = false }: { number: number; alt
 }
 
 export default function Page() {
-  return <article className={styles.article}>
+  return <ArticleLayout><article className={styles.article}>
     <Breadcrumbs items={[{name:"블로그",path:"/blog"},{name:title,path:"/blog/gemstone-hairpins"}]} />
     <header className={styles.header}>
       <p className={styles.category}>수공예 · 작품 이야기</p>
@@ -58,5 +59,5 @@ export default function Page() {
     <aside className={styles.note}><h2>작품 기록 안내</h2><p>이 글은 유정아트공방의 2018년 네이버 블로그 글과 당시 사진 4장을 바탕으로 하린문화예술 홈페이지에 맞게 재구성했습니다. 색 조합과 작품 감상에 도움이 되는 설명을 덧붙였습니다. 사진 속 작품의 현재 판매 여부나 동일한 수업 개설을 안내하는 글은 아닙니다.</p><a href="https://blog.naver.com/yoojeongart/221303882637" target="_blank" rel="noopener noreferrer">네이버 원문 보기 ↗</a></aside>
     <div className={styles.cta}><h2>나만의 수공예 작품을 만들어보고 싶으신가요?</h2><p>원하시는 공예 분야와 참여 인원, 희망 일정을 알려주시면 진행 가능한 프로그램을 안내해드립니다.</p><Link href="/contact" className="button">수공예 수업 문의</Link></div>
     <Link href="/blog" className={styles.back}>← 블로그 목록으로</Link>
-  </article>;
+  </article></ArticleLayout>;
 }
