@@ -1,0 +1,21 @@
+# 하린문화예술 (HARIN CULTURE & ARTS)
+
+> 전통공예, 감성예술, 문화예술교육과 AI 활용교육을 연결하는 문화예술 브랜드입니다.
+
+개인 원데이·정규 수업과 학교·복지기관·기업·단체 출강을 안내합니다. 수업 일정, 인원, 비용과 작품 구매 가능 여부는 문의 페이지에서 확인해 주세요.
+
+## 브랜드와 프로그램
+- [소개](https://harinart.vercel.app/about): 브랜드 이야기, 활동 분야, 운영 철학과 교육 방향.
+- [공예클래스](https://harinart.vercel.app/craft): 전통매듭, 칠보공예, 액세서리 수공예, 원데이·정규 강의.
+- [출강·단체수업](https://harinart.vercel.app/group-class): 학교, 복지기관, 기업, 지역단체, 평생학습기관과 문화센터 맞춤 프로그램.
+- [감성예술](https://harinart.vercel.app/healing-art): 타로 리딩·교육, 캘리그라피와 어반스케치.
+- [AI 활용교육](https://harinart.vercel.app/ai-class): 이미지, 블로그, SNS, 상세페이지, 강의자료와 라이브 방송 준비.
+
+## 작품과 기록
+- [갤러리](https://harinart.vercel.app/gallery): 실제 전통매듭·칠보공예·어반스케치 작품 기록.
+- [블로그](https://harinart.vercel.app/blog): 공예 이야기와 수업·활동 소식.
+- [작품 소개](https://harinart.vercel.app/shop): 작품 소개 및 주문제작 문의. 일부 작품은 등록 준비 중입니다.
+- [네이버 스마트스토어](https://smartstore.naver.com/yjgongbang): 작품샵 외부 연결.
+
+## 문의
+- [문의·예약](https://harinart.vercel.app/contact): 체험·정규 수강, 기관 출강, 작품·주문제작과 협업 상담.

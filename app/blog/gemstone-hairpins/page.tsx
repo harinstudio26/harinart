@@ -1,3 +1,4 @@
+import { Breadcrumbs } from '../../breadcrumbs';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -17,7 +18,7 @@ function Photo({ number, alt, caption, priority = false }: { number: number; alt
 
 export default function Page() {
   return <article className={styles.article}>
-    <nav aria-label="현재 위치" className={styles.breadcrumb}><Link href="/blog">블로그</Link><span aria-hidden="true"> / </span><span>수공예</span></nav>
+    <Breadcrumbs items={[{name:"블로그",path:"/blog"},{name:title,path:"/blog/gemstone-hairpins"}]} />
     <header className={styles.header}>
       <p className={styles.category}>수공예 · 작품 이야기</p>
       <h1>{title}</h1>

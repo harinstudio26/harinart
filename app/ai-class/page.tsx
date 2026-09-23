@@ -1,3 +1,4 @@
+import { Breadcrumbs } from '../breadcrumbs';
 import { pageMetadata } from '../seo';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
@@ -22,7 +23,7 @@ const details=[
   {title:'반복해서 쓰는 업무',text:'강의자료, 수업안, 라이브 방송 구성처럼 자주 반복되는 작업을 더 효율적으로 준비합니다.'},
 ];
 
-export default function Page(){return <>
+export default function Page(){return <><Breadcrumbs items={[{"name": "AI 활용교육", "path": "/ai-class"}]}/>
   <section className="page-hero">
     <p className="eyebrow">AI PRACTICAL CLASS</p>
     <h1>전통과 기술이 만나는<br/>새로운 가능성</h1>

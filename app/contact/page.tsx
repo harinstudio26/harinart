@@ -1,3 +1,4 @@
+import { Breadcrumbs } from '../breadcrumbs';
 import { pageMetadata } from '../seo';
 import { products } from '../shop/data';
 import { ContactForm } from './contact-form';
@@ -24,7 +25,7 @@ export default async function ContactPage({
   const query = await searchParams;
   const product = products.find((item) => item.slug === query.product);
 
-  return <>
+  return <><Breadcrumbs items={[{"name": "문의·예약", "path": "/contact"}]}/>
     <section className="page-hero contact-hero">
       <p className="eyebrow">CONTACT & RESERVATION</p>
       <h1>언제든지,<br/>편하게 문의해주세요.</h1>

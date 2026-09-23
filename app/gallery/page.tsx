@@ -1,3 +1,4 @@
+import { Breadcrumbs } from '../breadcrumbs';
 import { pageMetadata } from '../seo';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -56,7 +57,7 @@ function getGalleryItems():GalleryItem[]{
 
 export default function Page(){
   const items=getGalleryItems();
-  return <>
+  return <><Breadcrumbs items={[{"name": "갤러리", "path": "/gallery"}]}/>
     <section className="page-hero"><p className="eyebrow">GALLERY</p><h1>손끝에서 피어난<br/>우리의 순간들</h1><p className="lead">공예와 그림 작품의 기록을 실제 자료가 준비되는 순서대로 모아갑니다.</p></section>
     <section className="page-content">
       <div className="content-heading"><p className="eyebrow">HARIN MOMENTS</p><h2>분야별 작품 기록</h2><p>카테고리를 눌러 보고 싶은 작품을 골라볼 수 있습니다.</p></div>

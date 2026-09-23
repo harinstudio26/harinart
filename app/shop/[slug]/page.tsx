@@ -1,3 +1,4 @@
+import { Breadcrumbs } from '../../breadcrumbs';
 import { pageMetadata } from '../../seo';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
@@ -16,7 +17,7 @@ export default async function ProductDetail({params}:{params:Promise<{slug:strin
   const {slug}=await params;
   const product=products.find(item=>item.slug===slug);
   if(!product)notFound();
-  return <>
+  return <><Breadcrumbs items={[{name:"작품샵",path:"/shop"},{name:product.name,path:`/shop/${product.slug}`}]} />
     <section className="page-content product-detail">
       <div className="product-detail-image product-visual"><span>{product.category}</span><small>ARTWORK<br/>REGISTRATION</small></div>
       <div><p className="eyebrow">{product.category}</p><h1>{product.name}</h1><p className="body">{product.description}</p><dl><dt>가격</dt><dd>{product.price}</dd><dt>상태</dt><dd>{product.status}</dd></dl><div className="product-note"><b>작품 등록 안내</b><p>실제 사진, 작품명, 재료, 크기와 판매 여부는 확인된 정보를 기준으로 업데이트합니다.</p></div><Link className="button" href={`/contact?type=custom&product=${product.slug}`}>작품·주문제작 문의 <ArrowRight size={16}/></Link></div>
