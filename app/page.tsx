@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './services.module.css';
-import { ArrowRight, Bot, Heart, Palette, ShoppingBag, Sparkles, Users } from 'lucide-react';
+import { ArrowRight, Bot, Heart, Palette, Sparkles } from 'lucide-react';
 import { products } from './shop/data';
 
 const services = [
@@ -14,10 +14,10 @@ const services = [
 ];
 
 const purposeCards = [
-  {eyebrow:'PERSONAL CLASS',title:'취미와 배움을 위한 개인 수업',desc:'공예를 처음 시작하거나 꾸준히 배우고 싶은 분을 위한 원데이·정규 프로그램입니다.',href:'/craft',Icon:Heart},
-  {eyebrow:'GROUP PROGRAM',title:'학교·기관·단체 출강',desc:'대상, 인원, 시간과 목적을 확인해 공예·감성예술·AI 프로그램을 맞춤 구성합니다.',href:'/group-class',Icon:Users},
-  {eyebrow:'ART SHOP',title:'손으로 만든 작품과 그림',desc:'전통매듭, 칠보, 액세서리와 그림 작품을 소개하고 작품·주문제작 문의로 연결합니다.',href:'/shop',Icon:ShoppingBag},
-  {eyebrow:'AI PRACTICAL',title:'창작과 홍보를 위한 AI 활용',desc:'공방, 소상공인, 강사와 창작자가 이미지·글·홍보 콘텐츠를 직접 만드는 실전 교육입니다.',href:'/ai-class',Icon:Bot},
+  {eyebrow:'PERSONAL CLASS',title:'취미와 배움을 위한 개인 수업',desc:'공예를 처음 시작하거나 꾸준히 배우고 싶은 분을 위한 원데이·정규 프로그램입니다.',href:'/craft',image:'/images/hero.png',alt:'전통매듭을 만드는 손을 담은 개인 수업 소개 이미지'},
+  {eyebrow:'GROUP PROGRAM',title:'학교·기관·단체 출강',desc:'대상, 인원, 시간과 목적을 확인해 공예·감성예술·AI 프로그램을 맞춤 구성합니다.',href:'/group-class',image:'/images/real/knot-03.webp',alt:'기관·단체 공예 프로그램을 소개하는 전통매듭 작품'},
+  {eyebrow:'ART SHOP',title:'손으로 만든 작품과 그림',desc:'전통매듭, 칠보, 액세서리와 그림 작품을 소개하고 작품·주문제작 문의로 연결합니다.',href:'/shop',image:'/images/real/urban-01.webp',alt:'하린문화예술 어반스케치 작품'},
+  {eyebrow:'AI PRACTICAL',title:'창작과 홍보를 위한 AI 활용',desc:'공방, 소상공인, 강사와 창작자가 이미지·글·홍보 콘텐츠를 직접 만드는 실전 교육입니다.',href:'/ai-class',image:'/images/services/ai.webp',alt:'노트북으로 창작하는 AI 활용 교육 소개 이미지'},
 ];
 
 const homePosts = [
@@ -53,7 +53,7 @@ export default function Home(){return <>
 
   <section className="soft section">
     <div className="section-head"><div><p className="eyebrow">CHOOSE YOUR WAY</p><h2>지금 필요한 방식으로 시작하세요</h2></div><p>개인 수업, 기관 출강, 작품 구매, AI 활용교육까지 방문 목적에 따라 바로 이동할 수 있습니다.</p></div>
-    <div className="purpose-grid">{purposeCards.map(({eyebrow,title,desc,href,Icon})=><Link href={href} className="purpose-card" key={title}><Icon size={24}/><p className="eyebrow">{eyebrow}</p><h3>{title}</h3><p>{desc}</p><span>바로가기 <ArrowRight size={15}/></span></Link>)}</div>
+    <div className="purpose-grid">{purposeCards.map(({eyebrow,title,desc,href,image,alt})=><Link href={href} className="purpose-card" key={title}><div className={styles.purposeImage}><Image src={image} alt={alt} fill sizes="(max-width: 760px) calc(100vw - 98px), (max-width: 1100px) calc((100vw - 70px) / 2 - 58px), 240px"/></div><p className="eyebrow">{eyebrow}</p><h3>{title}</h3><p>{desc}</p><span>바로가기 <ArrowRight size={15}/></span></Link>)}</div>
   </section>
 
   <section className="section split">
