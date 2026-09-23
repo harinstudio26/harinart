@@ -1,14 +1,16 @@
 import Link from 'next/link';
-import { ArrowRight, Bot, Gem, Heart, Palette, PenTool, ShoppingBag, Sparkles, Users } from 'lucide-react';
+import Image from 'next/image';
+import styles from './services.module.css';
+import { ArrowRight, Bot, Heart, Palette, ShoppingBag, Sparkles, Users } from 'lucide-react';
 import { products } from './shop/data';
 
 const services = [
-  {name:'전통매듭',desc:'전통의 멋을 생활 속 작품으로',href:'/craft',no:'01',Icon:Sparkles},
-  {name:'칠보공예',desc:'빛과 색으로 완성하는 공예',href:'/craft',no:'02',Icon:Palette},
-  {name:'액세서리 수공예',desc:'손으로 만드는 나만의 감성',href:'/craft',no:'03',Icon:Gem},
-  {name:'타로 리딩 · 교육',desc:'이미지와 이야기로 마음을 읽는 시간',href:'/healing-art',no:'04',Icon:Heart},
-  {name:'캘리그라피 · 어반스케치',desc:'글과 그림으로 기록하는 일상',href:'/healing-art',no:'05',Icon:PenTool},
-  {name:'AI 활용 교육',desc:'내 일에 바로 쓰는 실용적인 AI',href:'/ai-class',no:'06',Icon:Bot},
+  {name:'전통매듭',desc:'전통의 멋을 생활 속 작품으로',href:'/craft',no:'01',image:'/images/real/knot-03.webp',alt:'하린문화예술 전통매듭 작품'},
+  {name:'칠보공예',desc:'빛과 색으로 완성하는 공예',href:'/craft',no:'02',image:'/images/real/enamel-02.webp',alt:'하린문화예술 칠보공예 작품'},
+  {name:'액세서리 수공예',desc:'손으로 만드는 나만의 감성',href:'/craft',no:'03',image:'/images/blog/gemstone-hairpin-1.jpg',alt:'꽃과 원석으로 장식한 수공예 헤어핀'},
+  {name:'타로 리딩 · 교육',desc:'이미지와 이야기로 마음을 읽는 시간',href:'/healing-art',no:'04',image:'/images/services/tarot.webp',alt:'타로 카드와 덱을 담은 소개용 AI 이미지'},
+  {name:'캘리그라피 · 어반스케치',desc:'글과 그림으로 기록하는 일상',href:'/healing-art',no:'05',image:'/images/real/urban-01.webp',alt:'하린문화예술 어반스케치 작품'},
+  {name:'AI 활용 교육',desc:'내 일에 바로 쓰는 실용적인 AI',href:'/ai-class',no:'06',image:'/images/services/ai.webp',alt:'노트북으로 창작하는 작업 공간을 담은 소개용 AI 이미지'},
 ];
 
 const purposeCards = [
@@ -46,7 +48,7 @@ export default function Home(){return <>
 
   <section className="section">
     <div className="section-head"><div><p className="eyebrow">WHAT WE DO</p><h2>하린문화예술의 주요 서비스</h2></div><p>손으로 만드는 기쁨부터 새로운 기술을 배우는 즐거움까지, 목적에 맞는 문화예술 프로그램을 찾아보세요.</p></div>
-    <div className="service-grid">{services.map(({name,desc,href,no,Icon})=><Link href={href} className="service-card" key={name}><span>{no}</span><div className={'card-art art-'+no}><Icon size={34}/></div><h3>{name}</h3><p>{desc}</p><b>자세히 보기 <ArrowRight size={14}/></b></Link>)}</div>
+    <div className="service-grid">{services.map(({name,desc,href,no,image,alt})=><Link href={href} className="service-card" key={name}><span>{no}</span><div className={styles.image}><Image src={image} alt={alt} fill sizes="(max-width: 520px) calc(100vw - 40px), (max-width: 760px) calc((100vw - 52px) / 2), (max-width: 1100px) calc((100vw - 84px) / 3), 200px"/></div><h3>{name}</h3><p>{desc}</p><b>자세히 보기 <ArrowRight size={14}/></b></Link>)}</div>
   </section>
 
   <section className="soft section">
