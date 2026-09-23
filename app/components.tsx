@@ -161,7 +161,7 @@ export function StandardPage({ data }: { data: PageData }) {
     {data.summary && <section className="page-summary" aria-label="프로그램 요약">{data.summary.map(item=><div key={item.label}><span>{item.label}</span><b>{item.value}</b></div>)}</section>}
     <section className="page-content">
       <div className="content-heading"><p className="eyebrow">PROGRAM GUIDE</p><h2>{isAbout ? '하린문화예술을 소개합니다' : '프로그램 안내'}</h2><p>{isAbout ? '브랜드의 방향과 활동 분야를 한눈에 살펴보세요.' : '관심 있는 분야를 살펴보고 나에게 맞는 수업과 진행 방식을 찾아보세요.'}</p></div>
-      <div className={`program-grid ${isAbout ? 'about-grid' : ''}`}>{data.items.map((item, i) => <article className="program" key={item.name}><span className="program-no">0{i + 1}</span><h3>{item.name}</h3><p>{item.description}</p></article>)}</div>
+      <div className={`program-grid ${isAbout ? 'about-grid' : ''}`}>{data.items.map((item, i) => <article id={`program-${i + 1}`} className="program" key={item.name}><span className="program-no">0{i + 1}</span><h3>{item.name}</h3><p>{item.description}</p></article>)}</div>
 
       {data.guideItems && <section className="guide-panel"><div className="guide-copy"><p className="eyebrow">DETAIL GUIDE</p><h2>{data.guideTitle}</h2><p>{data.guideIntro}</p></div><div className="guide-list">{data.guideItems.map(item=><article key={item.title}><CheckCircle2 size={19}/><div><h3>{item.title}</h3><p>{item.text}</p></div></article>)}</div></section>}
 

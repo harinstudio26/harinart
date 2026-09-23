@@ -1,20 +1,65 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const nav = [
-  ['소개', '/about'], ['공예클래스', '/craft'], ['출강·단체수업', '/group-class'],
-  ['감성예술', '/healing-art'], ['AI활용교육', '/ai-class'], ['작품샵', 'https://smartstore.naver.com/yjgongbang'],
-  ['갤러리', '/gallery'], ['블로그', '/blog'], ['문의·예약', '/contact'],
+  {label:'소개', href:'/about', items:['하린문화예술 소개','브랜드 스토리','대표 소개','활동 분야','운영 철학','교육 방향']},
+  {label:'공예클래스', href:'/craft', items:['전통매듭','칠보공예','액세서리 수공예','원데이 클래스','정규 강의']},
+  {label:'출강·단체수업', href:'/group-class', items:['복지기관','학교','기업','지역단체','평생학습기관','문화센터']},
+  {label:'감성예술', href:'/healing-art', items:['타로 리딩 · 타로 교육','캘리그라피','어반스케치','감성 · 힐링 프로그램']},
+  {label:'AI활용교육', href:'/ai-class', items:['AI 이미지 만들기','작품 홍보 이미지','블로그 글 작성','SNS · 릴스 콘텐츠','상세페이지','강의자료','AI 마케팅 활용','라이브 방송 활용']},
+  {label:'작품샵', href:'https://smartstore.naver.com/yjgongbang'},
+  {label:'갤러리', href:'/gallery'}, {label:'블로그', href:'/blog'}, {label:'문의·예약', href:'/contact'},
 ];
 
-export function SiteShell({ children }: { children: React.ReactNode }) {
+function HeaderNav({ mobile = false, onNavigate }: { mobile?: boolean; onNavigate: () => void }) {
   const pathname = usePathname();
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const prefix = mobile ? 'mobile' : 'desktop';
+  useEffect(() => {
+    const dismiss = (event: PointerEvent) => {
+      if (event.target instanceof Node && !navRef.current?.contains(event.target)) setExpanded(null);
+    };
+    const escape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || !navRef.current?.contains(document.activeElement)) return;
+      const trigger = navRef.current.querySelector<HTMLButtonElement>('button[aria-expanded="true"]');
+      if (trigger) { trigger.focus(); setExpanded(null); }
+    };
+    document.addEventListener('pointerdown', dismiss);
+    document.addEventListener('keydown', escape);
+    return () => {
+      document.removeEventListener('pointerdown', dismiss);
+      document.removeEventListener('keydown', escape);
+    };
+  }, []);
+  const navigate = () => { setExpanded(null); onNavigate(); };
+  return <nav ref={navRef} className={mobile ? 'mobile-nav' : 'desktop-nav'} aria-label={mobile ? '모바일 메뉴' : '주요 메뉴'}>
+    {nav.map(({label, href, items}) => {
+      const active = pathname === href || pathname.startsWith(`${href}/`);
+      const external = href.startsWith('https://');
+      const id = `${prefix}-${href.slice(1)}`;
+      return items ? <div className="nav-group" key={href} onBlur={event => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setExpanded(current => current === href ? null : current);
+      }}>
+        <button type="button" className={`nav-trigger${active ? ' active' : ''}`} aria-expanded={expanded === href} aria-controls={id}
+          onClick={() => setExpanded(expanded === href ? null : href)}>{label}<ChevronDown size={14} aria-hidden="true"/></button>
+        <div id={id} className="nav-submenu" hidden={expanded !== href}>
+          <Link href={href} onClick={navigate} className="nav-overview">{label} 전체보기</Link>
+          {items.map((item, i) => <Link key={item} href={`${href}#program-${i + 1}`} onClick={navigate}>{item}</Link>)}
+        </div>
+      </div> : <Link key={href} href={href} onClick={navigate} className={active ? 'active' : ''} aria-current={active ? 'page' : undefined}
+        target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}
+        aria-label={external ? label+' · 네이버 스마트스토어 (새 창)' : undefined}>{label}</Link>;
+    })}
+  </nav>;
+}
+
+export function SiteShell({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
-  const isActive = (href: string) => pathname === href || (href !== '/' && pathname.startsWith(`${href}/`));
 
   return <>
     <a className="skip-link" href="#main-content">본문 바로가기</a>
@@ -23,15 +68,13 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         <Link href="/" className="logo" aria-label="하린문화예술 홈">
           <b>하린문화예술</b><small>HARIN CULTURE & ARTS</small>
         </Link>
-        <nav className="desktop-nav" aria-label="주요 메뉴">
-          {nav.map(([label, href]) => <Link href={href} target={href.startsWith('https://') ? '_blank' : undefined} rel={href.startsWith('https://') ? 'noopener noreferrer' : undefined} aria-label={href.startsWith('https://') ? label+' · 네이버 스마트스토어 (새 창)' : undefined} className={isActive(href) ? 'active' : ''} aria-current={isActive(href) ? 'page' : undefined} key={href}>{label}</Link>)}
-        </nav>
+        <HeaderNav onNavigate={() => setOpen(false)}/>
         <div className="nav-actions">
           <Link href="/contact" className="nav-cta">문의하기</Link>
           <button className="menu" onClick={() => setOpen(!open)} aria-label={open ? '메뉴 닫기' : '메뉴 열기'} aria-expanded={open}>{open ? <X/> : <Menu/>}</button>
         </div>
       </div>
-      {open && <nav className="mobile-nav" aria-label="모바일 메뉴">{nav.map(([label, href]) => <Link href={href} target={href.startsWith('https://') ? '_blank' : undefined} rel={href.startsWith('https://') ? 'noopener noreferrer' : undefined} aria-label={href.startsWith('https://') ? label+' · 네이버 스마트스토어 (새 창)' : undefined} className={isActive(href) ? 'active' : ''} aria-current={isActive(href) ? 'page' : undefined} onClick={() => setOpen(false)} key={href}>{label}</Link>)}</nav>}
+      {open && <HeaderNav mobile onNavigate={() => setOpen(false)}/>}
     </header>
     <main id="main-content" tabIndex={-1}>{children}</main>
     <footer>

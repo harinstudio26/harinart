@@ -42,7 +42,7 @@ export default function Page(){return <>
     </div>
 
     <div className={styles.programGrid}>
-      {programs.map(program=><article className={styles.programCard} key={program.no}>
+      {programs.map((program, i)=><article id={`program-${i + 1}`} className={styles.programCard} key={program.no}>
         <div className={styles.imageWrap}><img src={program.image} alt={program.alt}/><span>{program.no}</span></div>
         <div className={styles.cardCopy}><h3>{program.title}</h3><p>{program.text}</p></div>
       </article>)}
