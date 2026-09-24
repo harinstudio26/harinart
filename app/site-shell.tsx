@@ -66,8 +66,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     <header className="header">
       <div className="nav">
         <Link href="/" className="logo" aria-label="하린문화예술 홈">
-          <span className="logo-mark" aria-hidden="true"><img src="/favicon.png" alt="" /></span>
-          <span className="logo-copy"><b>하린문화예술</b><small>HARIN CULTURE & ARTS</small></span>
+          <b>하린문화예술</b><small>HARIN CULTURE & ARTS</small>
         </Link>
         <HeaderNav onNavigate={() => setOpen(false)}/>
         <div className="nav-actions">
