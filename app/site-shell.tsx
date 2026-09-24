@@ -43,9 +43,15 @@ function HeaderNav({ mobile = false, onNavigate }: { mobile?: boolean; onNavigat
       const active = pathname === href || pathname.startsWith(`${href}/`);
       const external = href.startsWith('https://');
       const id = `${prefix}-${href.slice(1)}`;
-      return items ? <div className="nav-group" key={href} onBlur={event => {
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setExpanded(current => current === href ? null : current);
-      }}>
+      return items ? <div
+        className="nav-group"
+        key={href}
+        onMouseEnter={() => { if (!mobile) setExpanded(href); }}
+        onMouseLeave={() => { if (!mobile) setExpanded(null); }}
+        onBlur={event => {
+          if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setExpanded(current => current === href ? null : current);
+        }}
+      >
         <button type="button" className={`nav-trigger${active ? ' active' : ''}`} aria-expanded={expanded === href} aria-controls={id}
           onClick={() => setExpanded(expanded === href ? null : href)}>{label}<ChevronDown size={14} aria-hidden="true"/></button>
         <div id={id} className="nav-submenu" hidden={expanded !== href}>
