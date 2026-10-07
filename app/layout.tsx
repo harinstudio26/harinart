@@ -5,6 +5,11 @@ import './real-photos.css';
 import { SiteShell } from './site-shell';
 
 export const metadata: Metadata = {
+  verification: {
+    other: {
+      'naver-site-verification': 'fa02b4cb78c160ba7c721e39a85eca7b69516c2f',
+    },
+  },
   metadataBase: new URL('https://harinart.vercel.app'),
 
   title: {
