@@ -1,3 +1,5 @@
+import {createHmac,randomUUID} from 'node:crypto';
+
 const inquiryTypes=new Set(['수강·체험 문의','출강·단체수업','AI 활용교육','타로·감성예술','작품 구매','주문제작','협업 문의','기타']);
 
 class ContactError extends Error {
@@ -42,14 +44,28 @@ export async function POST(request:Request) {
     if(!endpoint||!secret)throw new ContactError('문의 접수 연결을 준비 중입니다. 잠시 후 다시 이용해 주세요.',503);
     if(!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(endpoint))throw new ContactError('문의 접수 연결 설정을 확인 중입니다.',503);
 
+    const id=randomUUID();
+    const forwardedFor=request.headers.get('x-vercel-forwarded-for')||request.headers.get('x-forwarded-for')||'unknown';
+    const clientAddress=forwardedFor.split(',')[0].trim();
+    const rateKey=createHmac('sha256',secret).update(`contact:${clientAddress}`).digest('hex');
+    const payload=JSON.stringify({
+      board:'contact',id,rateKey,files:[],
+      row:{name,phone,email,category:inquiryType,title:`${inquiryType} · ${program||'일반 상담'}`,content:message,details:{subject:program,date:preferredDate,people:participants},consent_version:'2026-10-07-v1'},
+    });
+    const timestamp=Date.now();
+    const signature=createHmac('sha256',secret).update(`${timestamp}.${payload}`).digest('hex');
+
     let response:Response;
     try {
-      response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({secret,name,phone,email,inquiryType,program,preferredDate,participants,message,consent:true}),cache:'no-store',redirect:'follow',signal:AbortSignal.timeout(25_000)});
+      response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({secret,name,phone,email,inquiryType,program,preferredDate,participants,message,consent:true,timestamp,payload,signature}),cache:'no-store',redirect:'follow',signal:AbortSignal.timeout(25_000)});
     }catch{
       throw new ContactError('접수 결과를 확인하지 못했습니다. 입력 내용을 유지한 채 잠시 후 다시 시도해 주세요.',503);
     }
-    const result=await response.json().catch(()=>null) as {ok?:boolean}|null;
-    if(!response.ok||result?.ok!==true)throw new ContactError('문의가 저장되지 않았습니다. 잠시 후 다시 시도해 주세요.',502);
+    const result=await response.json().catch(()=>null) as {ok?:boolean;code?:string}|null;
+    if(!response.ok||result?.ok!==true){
+      if(result?.code==='AUTH')throw new ContactError('Google Sheets 인증 설정이 일치하지 않습니다. 관리자에게 문의해 주세요.',502);
+      throw new ContactError('문의가 저장되지 않았습니다. 잠시 후 다시 시도해 주세요.',502);
+    }
     return json({ok:true,message:'문의가 정상적으로 접수되었습니다.'},201);
   }catch(error){
     const known=error instanceof ContactError;
